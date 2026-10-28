@@ -154,4 +154,34 @@ public partial class FormContacts : Form
         m_journal?.Consigner(operation, exception);
         AfficherMessage("Opération impossible pour le moment. Réessayez après correction de l'incident.");
     }
+
+    private void label1_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
+    {
+
+    }
+
+    private void lNom_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
+    {
+
+    }
+
+    private void label2_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    private void textBox2_TextChanged(object sender, EventArgs e)
+    {
+
+    }
 }
