@@ -48,8 +48,13 @@ public sealed class DepotContactsJson : IDepotContacts
         ArgumentNullException.ThrowIfNull(motClef);
         string recherche = motClef.Trim();
         List<Contact> contacts = Lire();
-        // E2-R : seul bloc hors présentation à compléter. Conserver les trois lignes ci-dessus.
-        throw new NotImplementedException("E2-R : recherche par mot-clef à compléter à l'exercice 2.");
+
+        IEnumerable<Contact> contactsFiltree = contacts.Where((c) =>
+        {
+            return c.Nom.Contains(recherche, StringComparison.OrdinalIgnoreCase) ||
+            c.Courriel.Contains(recherche, StringComparison.OrdinalIgnoreCase);
+        });
+        return contactsFiltree.ToArray();
     }
 
     private List<Contact> Lire()
