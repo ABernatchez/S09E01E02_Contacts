@@ -59,7 +59,16 @@ public partial class FormContacts : Form
     {
         try
         {
-            // E1-C : construire DemandeCreationContact, appeler Creation.Executer et traiter le résultat.
+            DemandeCreationContact demandeCreation = new(tbNom.Text, tbCourriel.Text);
+            Result<ContactDto> result = Creation.Executer(demandeCreation);
+            if (result.EstSucces)
+            {
+                AfficherMessage($"Nom contact créer: {result.Valeur.Nom}");
+            }
+            else
+            {
+                AfficherMessage(result.MessageErreur);
+            }
             // E2-C : après succès, effacer la saisie, vider la recherche et actualiser la liste.
         }
         catch (UnauthorizedAccessException exception)
@@ -88,12 +97,14 @@ public partial class FormContacts : Form
 
     private void EffacerSaisie()
     {
-        // E1-E : effacer les deux champs et redonner le focus au nom.
+        tbNom.Clear();
+        tbCourriel.Clear();
+        tbNom.Focus();
     }
 
     private void AfficherMessage(string message)
     {
-        // E1-M : afficher message dans lEtat.
+        lEtat.Text = $"État de l'opération -- {message}";
     }
 
     private void bRechercher_Click(object? sender, EventArgs e)
