@@ -17,54 +17,91 @@ partial class FormContacts
 
     private void InitializeComponent()
     {
-        label1 = new Label();
+        tableLayoutRoot = new TableLayoutPanel();
+        lTitle = new Label();
         tableLayoutPanel1 = new TableLayoutPanel();
         lNom = new Label();
         tbNom = new TextBox();
-        tbCourriel = new TextBox();
         lCourriel = new Label();
+        lMotClef = new Label();
+        tbCourriel = new TextBox();
         bCreer = new Button();
         bEffacer = new Button();
-        flowLayoutPanel1 = new FlowLayoutPanel();
+        tableLayoutPanelMotClef = new TableLayoutPanel();
+        tbMotClef = new TextBox();
+        bRechercher = new Button();
+        bTous = new Button();
+        dgvContacts = new DataGridView();
+        dvgContactsColumnNom = new DataGridViewTextBoxColumn();
+        dvgContactsColumnCourriel = new DataGridViewTextBoxColumn();
+        lNombre = new Label();
         lEtat = new Label();
+        tableLayoutRoot.SuspendLayout();
         tableLayoutPanel1.SuspendLayout();
-        flowLayoutPanel1.SuspendLayout();
+        tableLayoutPanelMotClef.SuspendLayout();
+        ((System.ComponentModel.ISupportInitialize)dgvContacts).BeginInit();
         SuspendLayout();
         // 
-        // label1
+        // tableLayoutRoot
         // 
-        label1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-        label1.AutoSize = true;
-        label1.BackColor = SystemColors.Control;
-        label1.Font = new Font("Segoe UI", 16F);
-        label1.Location = new Point(3, 0);
-        label1.Name = "label1";
-        label1.Size = new Size(776, 37);
-        label1.TabIndex = 1;
-        label1.Text = "Contacts - maquette E1";
-        label1.Click += label1_Click;
+        tableLayoutRoot.ColumnCount = 1;
+        tableLayoutRoot.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        tableLayoutRoot.Controls.Add(lTitle, 0, 0);
+        tableLayoutRoot.Controls.Add(tableLayoutPanel1, 0, 1);
+        tableLayoutRoot.Controls.Add(dgvContacts, 0, 2);
+        tableLayoutRoot.Controls.Add(lNombre, 0, 3);
+        tableLayoutRoot.Controls.Add(lEtat, 0, 4);
+        tableLayoutRoot.Dock = DockStyle.Fill;
+        tableLayoutRoot.Location = new Point(0, 0);
+        tableLayoutRoot.Name = "tableLayoutRoot";
+        tableLayoutRoot.RowCount = 5;
+        tableLayoutRoot.RowStyles.Add(new RowStyle());
+        tableLayoutRoot.RowStyles.Add(new RowStyle());
+        tableLayoutRoot.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+        tableLayoutRoot.RowStyles.Add(new RowStyle());
+        tableLayoutRoot.RowStyles.Add(new RowStyle());
+        tableLayoutRoot.Size = new Size(782, 548);
+        tableLayoutRoot.TabIndex = 0;
+        // 
+        // lTitle
+        // 
+        lTitle.AutoSize = true;
+        lTitle.BackColor = SystemColors.Control;
+        lTitle.Dock = DockStyle.Fill;
+        lTitle.Font = new Font("Segoe UI", 16F);
+        lTitle.Location = new Point(3, 0);
+        lTitle.Name = "lTitle";
+        lTitle.Size = new Size(776, 37);
+        lTitle.TabIndex = 1;
+        lTitle.Text = "Contacts - maquette E1";
+        lTitle.Click += label1_Click;
         // 
         // tableLayoutPanel1
         // 
         tableLayoutPanel1.AutoSize = true;
         tableLayoutPanel1.ColumnCount = 3;
-        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 32.84884F));
-        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 123F));
-        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 67.15116F));
+        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 200F));
+        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+        tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
         tableLayoutPanel1.Controls.Add(lNom, 0, 0);
         tableLayoutPanel1.Controls.Add(tbNom, 1, 0);
-        tableLayoutPanel1.Controls.Add(tbCourriel, 1, 1);
         tableLayoutPanel1.Controls.Add(lCourriel, 0, 1);
+        tableLayoutPanel1.Controls.Add(lMotClef, 0, 3);
+        tableLayoutPanel1.Controls.Add(tbCourriel, 1, 1);
         tableLayoutPanel1.Controls.Add(bCreer, 1, 2);
         tableLayoutPanel1.Controls.Add(bEffacer, 2, 2);
+        tableLayoutPanel1.Controls.Add(tableLayoutPanelMotClef, 1, 3);
+        tableLayoutPanel1.Dock = DockStyle.Fill;
         tableLayoutPanel1.Location = new Point(3, 40);
         tableLayoutPanel1.Name = "tableLayoutPanel1";
-        tableLayoutPanel1.RowCount = 3;
-        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 49F));
-        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 43.1372566F));
-        tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 56.8627434F));
-        tableLayoutPanel1.Size = new Size(776, 125);
+        tableLayoutPanel1.RowCount = 4;
+        tableLayoutPanel1.RowStyles.Add(new RowStyle());
+        tableLayoutPanel1.RowStyles.Add(new RowStyle());
+        tableLayoutPanel1.RowStyles.Add(new RowStyle());
+        tableLayoutPanel1.RowStyles.Add(new RowStyle());
+        tableLayoutPanel1.Size = new Size(776, 138);
         tableLayoutPanel1.TabIndex = 3;
+        tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
         // 
         // lNom
         // 
@@ -72,7 +109,7 @@ partial class FormContacts
         lNom.AutoSize = true;
         lNom.Location = new Point(3, 0);
         lNom.Name = "lNom";
-        lNom.Size = new Size(42, 49);
+        lNom.Size = new Size(42, 33);
         lNom.TabIndex = 0;
         lNom.Text = "&Nom";
         lNom.TextAlign = ContentAlignment.MiddleLeft;
@@ -81,36 +118,47 @@ partial class FormContacts
         // 
         tbNom.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
         tableLayoutPanel1.SetColumnSpan(tbNom, 2);
-        tbNom.Location = new Point(217, 3);
+        tbNom.Location = new Point(203, 3);
         tbNom.Name = "tbNom";
-        tbNom.Size = new Size(556, 27);
+        tbNom.Size = new Size(570, 27);
         tbNom.TabIndex = 0;
-        // 
-        // tbCourriel
-        // 
-        tbCourriel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
-        tableLayoutPanel1.SetColumnSpan(tbCourriel, 2);
-        tbCourriel.Location = new Point(217, 52);
-        tbCourriel.Name = "tbCourriel";
-        tbCourriel.Size = new Size(556, 27);
-        tbCourriel.TabIndex = 1;
-        tbCourriel.TextChanged += textBox2_TextChanged;
         // 
         // lCourriel
         // 
         lCourriel.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
         lCourriel.AutoSize = true;
-        lCourriel.Location = new Point(3, 49);
+        lCourriel.Location = new Point(3, 33);
         lCourriel.Name = "lCourriel";
-        lCourriel.Size = new Size(61, 32);
+        lCourriel.Size = new Size(61, 33);
         lCourriel.TabIndex = 1;
         lCourriel.Text = "C&ourriel";
         lCourriel.TextAlign = ContentAlignment.MiddleLeft;
         // 
+        // lMotClef
+        // 
+        lMotClef.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left;
+        lMotClef.Location = new Point(3, 102);
+        lMotClef.Name = "lMotClef";
+        lMotClef.Size = new Size(66, 36);
+        lMotClef.TabIndex = 4;
+        lMotClef.Text = "Mot-clef";
+        lMotClef.TextAlign = ContentAlignment.MiddleLeft;
+        lMotClef.Click += label2_Click_1;
+        // 
+        // tbCourriel
+        // 
+        tbCourriel.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        tableLayoutPanel1.SetColumnSpan(tbCourriel, 2);
+        tbCourriel.Location = new Point(203, 36);
+        tbCourriel.Name = "tbCourriel";
+        tbCourriel.Size = new Size(570, 27);
+        tbCourriel.TabIndex = 1;
+        tbCourriel.TextChanged += textBox2_TextChanged;
+        // 
         // bCreer
         // 
         bCreer.AutoSize = true;
-        bCreer.Location = new Point(217, 84);
+        bCreer.Location = new Point(203, 69);
         bCreer.Name = "bCreer";
         bCreer.Size = new Size(109, 30);
         bCreer.TabIndex = 2;
@@ -121,7 +169,7 @@ partial class FormContacts
         // bEffacer
         // 
         bEffacer.AutoSize = true;
-        bEffacer.Location = new Point(340, 84);
+        bEffacer.Location = new Point(318, 69);
         bEffacer.Name = "bEffacer";
         bEffacer.Size = new Size(131, 30);
         bEffacer.TabIndex = 3;
@@ -129,28 +177,104 @@ partial class FormContacts
         bEffacer.UseVisualStyleBackColor = true;
         bEffacer.Click += bEffacer_Click;
         // 
-        // flowLayoutPanel1
+        // tableLayoutPanelMotClef
         // 
-        flowLayoutPanel1.Controls.Add(label1);
-        flowLayoutPanel1.Controls.Add(tableLayoutPanel1);
-        flowLayoutPanel1.Controls.Add(lEtat);
-        flowLayoutPanel1.Dock = DockStyle.Fill;
-        flowLayoutPanel1.FlowDirection = FlowDirection.TopDown;
-        flowLayoutPanel1.Location = new Point(0, 0);
-        flowLayoutPanel1.Name = "flowLayoutPanel1";
-        flowLayoutPanel1.Size = new Size(782, 548);
-        flowLayoutPanel1.TabIndex = 6;
-        flowLayoutPanel1.Paint += flowLayoutPanel1_Paint;
+        tableLayoutPanelMotClef.AutoSize = true;
+        tableLayoutPanelMotClef.ColumnCount = 3;
+        tableLayoutPanel1.SetColumnSpan(tableLayoutPanelMotClef, 2);
+        tableLayoutPanelMotClef.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+        tableLayoutPanelMotClef.ColumnStyles.Add(new ColumnStyle());
+        tableLayoutPanelMotClef.ColumnStyles.Add(new ColumnStyle());
+        tableLayoutPanelMotClef.Controls.Add(tbMotClef, 0, 0);
+        tableLayoutPanelMotClef.Controls.Add(bRechercher, 1, 0);
+        tableLayoutPanelMotClef.Controls.Add(bTous, 2, 0);
+        tableLayoutPanelMotClef.Dock = DockStyle.Fill;
+        tableLayoutPanelMotClef.Location = new Point(200, 102);
+        tableLayoutPanelMotClef.Margin = new Padding(0);
+        tableLayoutPanelMotClef.Name = "tableLayoutPanelMotClef";
+        tableLayoutPanelMotClef.RowCount = 1;
+        tableLayoutPanelMotClef.RowStyles.Add(new RowStyle());
+        tableLayoutPanelMotClef.Size = new Size(576, 36);
+        tableLayoutPanelMotClef.TabIndex = 5;
+        // 
+        // tbMotClef
+        // 
+        tbMotClef.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
+        tbMotClef.Location = new Point(3, 3);
+        tbMotClef.Name = "tbMotClef";
+        tbMotClef.Size = new Size(355, 27);
+        tbMotClef.TabIndex = 0;
+        // 
+        // bRechercher
+        // 
+        bRechercher.AutoSize = true;
+        bRechercher.Location = new Point(364, 3);
+        bRechercher.Name = "bRechercher";
+        bRechercher.Size = new Size(109, 30);
+        bRechercher.TabIndex = 6;
+        bRechercher.Text = "&Rechercher";
+        bRechercher.UseVisualStyleBackColor = true;
+        // 
+        // bTous
+        // 
+        bTous.Location = new Point(479, 3);
+        bTous.Name = "bTous";
+        bTous.Size = new Size(94, 29);
+        bTous.TabIndex = 7;
+        bTous.Text = "&Tous";
+        bTous.UseVisualStyleBackColor = true;
+        // 
+        // dgvContacts
+        // 
+        dgvContacts.AllowUserToAddRows = false;
+        dgvContacts.AllowUserToDeleteRows = false;
+        dgvContacts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        dgvContacts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+        dgvContacts.Columns.AddRange(new DataGridViewColumn[] { dvgContactsColumnNom, dvgContactsColumnCourriel });
+        dgvContacts.Dock = DockStyle.Fill;
+        dgvContacts.Location = new Point(3, 184);
+        dgvContacts.Name = "dgvContacts";
+        dgvContacts.ReadOnly = true;
+        dgvContacts.RowHeadersVisible = false;
+        dgvContacts.RowHeadersWidth = 51;
+        dgvContacts.ScrollBars = ScrollBars.Vertical;
+        dgvContacts.Size = new Size(776, 321);
+        dgvContacts.TabIndex = 5;
+        dgvContacts.CellContentClick += dataGridView1_CellContentClick;
+        // 
+        // dvgContactsColumnNom
+        // 
+        dvgContactsColumnNom.HeaderText = "Nom";
+        dvgContactsColumnNom.MinimumWidth = 125;
+        dvgContactsColumnNom.Name = "dvgContactsColumnNom";
+        dvgContactsColumnNom.ReadOnly = true;
+        // 
+        // dvgContactsColumnCourriel
+        // 
+        dvgContactsColumnCourriel.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        dvgContactsColumnCourriel.FillWeight = 70F;
+        dvgContactsColumnCourriel.HeaderText = "Courriel";
+        dvgContactsColumnCourriel.MinimumWidth = 6;
+        dvgContactsColumnCourriel.Name = "dvgContactsColumnCourriel";
+        dvgContactsColumnCourriel.ReadOnly = true;
+        // 
+        // lNombre
+        // 
+        lNombre.AutoSize = true;
+        lNombre.Location = new Point(3, 508);
+        lNombre.Name = "lNombre";
+        lNombre.TabIndex = 6;
+        lNombre.Text = "0 contacts(s) - INombre";
+        lNombre.Click += label3_Click_1;
         // 
         // lEtat
         // 
-        lEtat.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-        lEtat.Location = new Point(3, 168);
+        lEtat.AutoSize = true;
         lEtat.Name = "lEtat";
-        lEtat.Size = new Size(776, 20);
         lEtat.TabIndex = 4;
         lEtat.Text = "État de l'opération -- IEtat";
         lEtat.Click += label2_Click;
+        lNombre.Padding = new Padding(0, 10, 0, 10);
         // 
         // FormContacts
         // 
@@ -158,27 +282,39 @@ partial class FormContacts
         AutoScaleDimensions = new SizeF(8F, 20F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(782, 548);
-        Controls.Add(flowLayoutPanel1);
+        Controls.Add(tableLayoutRoot);
         Margin = new Padding(3, 4, 3, 4);
         MinimumSize = new Size(797, 584);
         Name = "FormContacts";
         Text = "Fiche de contact — à construire";
         Load += FormContacts_Load;
+        tableLayoutRoot.ResumeLayout(false);
+        tableLayoutRoot.PerformLayout();
         tableLayoutPanel1.ResumeLayout(false);
         tableLayoutPanel1.PerformLayout();
-        flowLayoutPanel1.ResumeLayout(false);
-        flowLayoutPanel1.PerformLayout();
+        tableLayoutPanelMotClef.ResumeLayout(false);
+        tableLayoutPanelMotClef.PerformLayout();
+        ((System.ComponentModel.ISupportInitialize)dgvContacts).EndInit();
         ResumeLayout(false);
         // Construire les contrôles dans le designer et relier chaque Click une seule fois.
     }
-    private Label label1;
+    private TableLayoutPanel tableLayoutRoot;
+    private Label lTitle;
     private TableLayoutPanel tableLayoutPanel1;
     private Label lNom;
     private Label lCourriel;
     private TextBox tbNom;
     private TextBox tbCourriel;
-    private FlowLayoutPanel flowLayoutPanel1;
     private Button bCreer;
-    private Button bEffacer;
     private Label lEtat;
+    private Button bEffacer;
+    private Label lMotClef;
+    private TableLayoutPanel tableLayoutPanelMotClef;
+    private TextBox tbMotClef;
+    private Button bRechercher;
+    private Button bTous;
+    private DataGridView dgvContacts;
+    private DataGridViewTextBoxColumn dvgContactsColumnNom;
+    private DataGridViewTextBoxColumn dvgContactsColumnCourriel;
+    private Label lNombre;
 }
