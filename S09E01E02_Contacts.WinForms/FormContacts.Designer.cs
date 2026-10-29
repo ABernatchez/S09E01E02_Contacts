@@ -32,8 +32,8 @@ partial class FormContacts
         bRechercher = new Button();
         bTous = new Button();
         dgvContacts = new DataGridView();
-        dvgContactsColumnNom = new DataGridViewTextBoxColumn();
-        dvgContactsColumnCourriel = new DataGridViewTextBoxColumn();
+        dgvContactsColumnNom = new DataGridViewTextBoxColumn();
+        dgvContactsColumnCourriel = new DataGridViewTextBoxColumn();
         lNombre = new Label();
         lEtat = new Label();
         tableLayoutRoot.SuspendLayout();
@@ -74,7 +74,6 @@ partial class FormContacts
         lTitle.Size = new Size(776, 37);
         lTitle.TabIndex = 1;
         lTitle.Text = "Contacts - maquette E1";
-        lTitle.Click += label1_Click;
         // 
         // tableLayoutPanel1
         // 
@@ -101,7 +100,6 @@ partial class FormContacts
         tableLayoutPanel1.RowStyles.Add(new RowStyle());
         tableLayoutPanel1.Size = new Size(776, 138);
         tableLayoutPanel1.TabIndex = 3;
-        tableLayoutPanel1.Paint += tableLayoutPanel1_Paint;
         // 
         // lNom
         // 
@@ -143,7 +141,6 @@ partial class FormContacts
         lMotClef.TabIndex = 4;
         lMotClef.Text = "Mot-clef";
         lMotClef.TextAlign = ContentAlignment.MiddleLeft;
-        lMotClef.Click += label2_Click_1;
         // 
         // tbCourriel
         // 
@@ -153,7 +150,6 @@ partial class FormContacts
         tbCourriel.Name = "tbCourriel";
         tbCourriel.Size = new Size(570, 27);
         tbCourriel.TabIndex = 1;
-        tbCourriel.TextChanged += textBox2_TextChanged;
         // 
         // bCreer
         // 
@@ -195,7 +191,6 @@ partial class FormContacts
         tableLayoutPanelMotClef.RowCount = 1;
         tableLayoutPanelMotClef.RowStyles.Add(new RowStyle());
         tableLayoutPanelMotClef.Size = new Size(576, 36);
-        tableLayoutPanelMotClef.TabIndex = 5;
         // 
         // tbMotClef
         // 
@@ -203,7 +198,7 @@ partial class FormContacts
         tbMotClef.Location = new Point(3, 3);
         tbMotClef.Name = "tbMotClef";
         tbMotClef.Size = new Size(355, 27);
-        tbMotClef.TabIndex = 0;
+        tbMotClef.TabIndex = 4;
         // 
         // bRechercher
         // 
@@ -211,18 +206,20 @@ partial class FormContacts
         bRechercher.Location = new Point(364, 3);
         bRechercher.Name = "bRechercher";
         bRechercher.Size = new Size(109, 30);
-        bRechercher.TabIndex = 6;
+        bRechercher.TabIndex = 5;
         bRechercher.Text = "&Rechercher";
         bRechercher.UseVisualStyleBackColor = true;
+        bRechercher.Click += bRechercher_Click;
         // 
         // bTous
         // 
         bTous.Location = new Point(479, 3);
         bTous.Name = "bTous";
         bTous.Size = new Size(94, 29);
-        bTous.TabIndex = 7;
+        bTous.TabIndex = 6;
         bTous.Text = "&Tous";
         bTous.UseVisualStyleBackColor = true;
+        bTous.Click += bTous_Click;
         // 
         // dgvContacts
         // 
@@ -230,7 +227,7 @@ partial class FormContacts
         dgvContacts.AllowUserToDeleteRows = false;
         dgvContacts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         dgvContacts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-        dgvContacts.Columns.AddRange(new DataGridViewColumn[] { dvgContactsColumnNom, dvgContactsColumnCourriel });
+        dgvContacts.Columns.AddRange(new DataGridViewColumn[] { dgvContactsColumnNom, dgvContactsColumnCourriel });
         dgvContacts.Dock = DockStyle.Fill;
         dgvContacts.Location = new Point(3, 184);
         dgvContacts.Name = "dgvContacts";
@@ -239,41 +236,38 @@ partial class FormContacts
         dgvContacts.RowHeadersWidth = 51;
         dgvContacts.ScrollBars = ScrollBars.Vertical;
         dgvContacts.Size = new Size(776, 321);
-        dgvContacts.TabIndex = 5;
-        dgvContacts.CellContentClick += dataGridView1_CellContentClick;
+        dgvContacts.AutoGenerateColumns = false;
         // 
         // dvgContactsColumnNom
         // 
-        dvgContactsColumnNom.HeaderText = "Nom";
-        dvgContactsColumnNom.MinimumWidth = 125;
-        dvgContactsColumnNom.Name = "dvgContactsColumnNom";
-        dvgContactsColumnNom.ReadOnly = true;
+        dgvContactsColumnNom.HeaderText = "Nom";
+        dgvContactsColumnNom.MinimumWidth = 125;
+        dgvContactsColumnNom.Name = "dvgContactsColumnNom";
+        dgvContactsColumnNom.ReadOnly = true;
+        dgvContactsColumnNom.DataPropertyName = "Nom";
         // 
         // dvgContactsColumnCourriel
         // 
-        dvgContactsColumnCourriel.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-        dvgContactsColumnCourriel.FillWeight = 70F;
-        dvgContactsColumnCourriel.HeaderText = "Courriel";
-        dvgContactsColumnCourriel.MinimumWidth = 6;
-        dvgContactsColumnCourriel.Name = "dvgContactsColumnCourriel";
-        dvgContactsColumnCourriel.ReadOnly = true;
+        dgvContactsColumnCourriel.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+        dgvContactsColumnCourriel.FillWeight = 70F;
+        dgvContactsColumnCourriel.HeaderText = "Courriel";
+        dgvContactsColumnCourriel.MinimumWidth = 6;
+        dgvContactsColumnCourriel.Name = "dvgContactsColumnCourriel";
+        dgvContactsColumnCourriel.ReadOnly = true;
+        dgvContactsColumnCourriel.DataPropertyName = "Courriel";
         // 
         // lNombre
         // 
         lNombre.AutoSize = true;
         lNombre.Location = new Point(3, 508);
         lNombre.Name = "lNombre";
-        lNombre.TabIndex = 6;
         lNombre.Text = "0 contacts(s) - INombre";
-        lNombre.Click += label3_Click_1;
         // 
         // lEtat
         // 
         lEtat.AutoSize = true;
         lEtat.Name = "lEtat";
-        lEtat.TabIndex = 4;
         lEtat.Text = "État de l'opération -- IEtat";
-        lEtat.Click += label2_Click;
         lNombre.Padding = new Padding(0, 10, 0, 10);
         // 
         // FormContacts
@@ -314,7 +308,7 @@ partial class FormContacts
     private Button bRechercher;
     private Button bTous;
     private DataGridView dgvContacts;
-    private DataGridViewTextBoxColumn dvgContactsColumnNom;
-    private DataGridViewTextBoxColumn dvgContactsColumnCourriel;
+    private DataGridViewTextBoxColumn dgvContactsColumnNom;
+    private DataGridViewTextBoxColumn dgvContactsColumnCourriel;
     private Label lNombre;
 }

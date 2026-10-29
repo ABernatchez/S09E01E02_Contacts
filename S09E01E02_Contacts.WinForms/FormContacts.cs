@@ -52,7 +52,28 @@ public partial class FormContacts : Form
 
     private void FormContacts_Load(object? sender, EventArgs e)
     {
-        // E2-L : charger tous les contacts au début de l'exercice 2. Rien à ajouter en E1.
+        try
+        {
+            IReadOnlyCollection<ContactDto> contacts = Consultation.ObtenirTous();
+            AfficherContacts(contacts);
+        }
+        catch (UnauthorizedAccessException exception)
+        {
+            SignalerIncident("Obtenir tous les contacts", exception);
+        }
+        catch (JsonException exception)
+        {
+            SignalerIncident("Obtenir tous les contacts", exception);
+        }
+        catch (InvalidDataException exception)
+        {
+            SignalerIncident("Obtenir tous les contacts", exception);
+        }
+        catch (IOException exception)
+        {
+            SignalerIncident("Obtenir tous les contacts", exception);
+        }
+        
     }
 
     private void bCreer_Click(object? sender, EventArgs e)
@@ -64,12 +85,19 @@ public partial class FormContacts : Form
             if (result.EstSucces)
             {
                 AfficherMessage($"Nom contact créer: {result.Valeur.Nom}");
+                IReadOnlyCollection<ContactDto> contacts = Consultation.ObtenirTous();
+                AfficherContacts(contacts);
+
+                tbNom.Clear();
+                tbCourriel.Clear();
+                tbMotClef.Clear();
+
+                tbNom.Focus();
             }
             else
             {
                 AfficherMessage(result.MessageErreur);
             }
-            // E2-C : après succès, effacer la saisie, vider la recherche et actualiser la liste.
         }
         catch (UnauthorizedAccessException exception)
         {
@@ -111,7 +139,8 @@ public partial class FormContacts : Form
     {
         try
         {
-            // E2-S : appeler Consultation.Rechercher avec le mot-clef puis AfficherContacts.
+            IReadOnlyCollection<ContactDto> contacts = Consultation.Rechercher(tbMotClef.Text);
+            AfficherContacts(contacts);
         }
         catch (UnauthorizedAccessException exception)
         {
@@ -135,7 +164,9 @@ public partial class FormContacts : Form
     {
         try
         {
-            // E2-T : vider tbMotClef puis afficher Consultation.ObtenirTous().
+            tbMotClef.Clear();
+            IReadOnlyCollection<ContactDto> contacts = Consultation.ObtenirTous();
+            AfficherContacts(contacts);
         }
         catch (UnauthorizedAccessException exception)
         {
@@ -157,72 +188,13 @@ public partial class FormContacts : Form
 
     private void AfficherContacts(IReadOnlyCollection<ContactDto> contacts)
     {
-        // E2-A : alimenter dgvContacts depuis les DTO, afficher le nombre de résultats dans lNombre.
+        dgvContacts.DataSource = contacts;
+        lNombre.Text = $"{contacts.Count} contacts(s)";
     }
 
     private void SignalerIncident(string operation, Exception exception)
     {
         m_journal?.Consigner(operation, exception);
         AfficherMessage("Opération impossible pour le moment. Réessayez après correction de l'incident.");
-    }
-
-    private void label1_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void tableLayoutPanel2_Paint(object sender, PaintEventArgs e)
-    {
-
-    }
-
-    private void lNom_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void flowLayoutPanel1_Paint(object sender, PaintEventArgs e)
-    {
-
-    }
-
-    private void label2_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void textBox2_TextChanged(object sender, EventArgs e)
-    {
-
-    }
-
-    private void tableLayoutPanel1_Paint(object sender, PaintEventArgs e)
-    {
-
-    }
-
-    private void label2_Click_1(object sender, EventArgs e)
-    {
-
-    }
-
-    private void label3_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-    {
-
-    }
-
-    private void label3_Click_1(object sender, EventArgs e)
-    {
-
-    }
-
-    private void flowLayoutPanel2_Paint(object sender, PaintEventArgs e)
-    {
-
     }
 }
